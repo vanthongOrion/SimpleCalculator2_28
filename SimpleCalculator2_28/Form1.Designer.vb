@@ -39,6 +39,7 @@ Partial Class Form1
         Me.Plus = New System.Windows.Forms.Button()
         Me.Camma = New System.Windows.Forms.Button()
         Me.Num0 = New System.Windows.Forms.Button()
+        Me.Clear = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Display
@@ -261,11 +262,25 @@ Partial Class Form1
         Me.Num0.Text = "0"
         Me.Num0.UseVisualStyleBackColor = False
         '
+        'Clear
+        '
+        Me.Clear.BackColor = System.Drawing.SystemColors.ActiveBorder
+        Me.Clear.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Clear.Font = New System.Drawing.Font("Century", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.Clear.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.Clear.Location = New System.Drawing.Point(85, 299)
+        Me.Clear.Name = "Clear"
+        Me.Clear.Size = New System.Drawing.Size(140, 37)
+        Me.Clear.TabIndex = 17
+        Me.Clear.Text = "Clear"
+        Me.Clear.UseVisualStyleBackColor = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(312, 301)
+        Me.ClientSize = New System.Drawing.Size(312, 352)
+        Me.Controls.Add(Me.Clear)
         Me.Controls.Add(Me.Equal)
         Me.Controls.Add(Me.Plus)
         Me.Controls.Add(Me.Camma)
@@ -306,4 +321,5 @@ Partial Class Form1
     Friend WithEvents Plus As Button
     Friend WithEvents Camma As Button
     Friend WithEvents Num0 As Button
+    Friend WithEvents Clear As Button
 End Class
