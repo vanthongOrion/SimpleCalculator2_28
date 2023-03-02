@@ -2,11 +2,10 @@
 
 Public Class Form1
 
-    Private PlusOn As Boolean = False
-    Private AbstractOn As Boolean = False
-    Private MultipleOn As Boolean = False
+    Private AddOn As Boolean = False
+    Private SubtractOn As Boolean = False
+    Private MultiplyOn As Boolean = False
     Private DivideOn As Boolean = False
-
 
     Private StringNum1 As String = ""
     Private StringNum2 As String = ""
@@ -17,45 +16,187 @@ Public Class Form1
     Private CountEqual As Integer = 0
     Private Result As Integer
 
-    Private Sub NumberClick(sender As Object, e As KeyPressEventArgs) Handles Num0.Click, Num1.Click, Num2.Click, Num3.Click,
-            Num4.Click, Num5.Click, Num6.Click, Num7.Click, Num8.Click, Num9.Click, MyBase.KeyPress
-        Debug.WriteLine(e.KeyChar)
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Activated
+        Me.KeyPreview = True
+    End Sub
 
-        If sender Is Num0 OrElse e.KeyChar = "0" Then
-            Update("0")
+    Private Sub Input_Hander(sender As Object, e As EventArgs) Handles MyBase.KeyPress, MyBase.KeyUp, Num0.Click, Num1.Click, Num2.Click, Num3.Click,
+            Num4.Click, Num5.Click, Num6.Click, Num7.Click, Num8.Click, Num9.Click, Add.Click, Subtract.Click, Multiply.Click,
+            Divide.Click, Comma.Click, Equal.Click, Clear.Click
 
-        ElseIf sender Is Num1 OrElse e.KeyChar = "1" Then
-            Update("1")
+        Dim InputKey As Char
 
-        ElseIf sender Is Num2 OrElse e.KeyChar = "2" Then
-            Update("2")
+        If sender Is Num0 Then
+            InputKey = "X"
 
-        ElseIf sender Is Num3 OrElse e.KeyChar = "3" Then
-            Update("3")
+        ElseIf sender Is Num1 Then
+            InputKey = "1"
 
-        ElseIf sender Is Num4 OrElse e.KeyChar = "4" Then
-            Update("4")
+        ElseIf sender Is Num2 Then
+            InputKey = "2"
 
-        ElseIf sender Is Num5 OrElse e.KeyChar = "5" Then
-            Update("5")
+        ElseIf sender Is Num3 Then
+            InputKey = "3"
 
-        ElseIf sender Is Num6 OrElse e.KeyChar = "6" Then
-            Update("6")
+        ElseIf sender Is Num4 Then
+            InputKey = "4"
 
-        ElseIf sender Is Num7 OrElse e.KeyChar = "7" Then
-            Update("7")
+        ElseIf sender Is Num5 Then
+            InputKey = "5"
 
-        ElseIf sender Is Num8 OrElse e.KeyChar = "8" Then
-            Update("8")
+        ElseIf sender Is Num6 Then
+            InputKey = "6"
 
-        ElseIf sender Is Num9 OrElse e.KeyChar = "9" Then
-            Update("9")
+        ElseIf sender Is Num7 Then
+            InputKey = "7"
+
+        ElseIf sender Is Num8 Then
+            InputKey = "8"
+
+        ElseIf sender Is Num9 Then
+            InputKey = "9"
+
+        ElseIf sender Is Add Then
+            InputKey = "A"
+
+        ElseIf sender Is Subtract Then
+            InputKey = "S"
+
+        ElseIf sender Is Multiply Then
+            InputKey = "M"
+
+        ElseIf sender Is Divide Then
+            InputKey = "D"
+
+        ElseIf sender Is Comma Then
+            InputKey = "K"
+
+        ElseIf sender Is Equal Then
+            InputKey = "E"
+
+        ElseIf sender Is Clear Then
+            InputKey = "C"
+
+        End If
+
+
+        If TypeOf e Is KeyEventArgs Then
+            Dim K As KeyEventArgs = CTypeDynamic(Of KeyEventArgs)(e)
+
+            Select Case K.KeyCode
+
+                Case Keys.NumPad0, Keys.D0
+                    InputKey = "0"
+
+                Case Keys.NumPad1, Keys.D1
+                    InputKey = "1"
+
+                Case Keys.NumPad2, Keys.D2
+                    InputKey = "2"
+
+                Case Keys.NumPad3, Keys.D3
+                    InputKey = "3"
+
+                Case Keys.NumPad4, Keys.D4
+                    InputKey = "4"
+
+                Case Keys.NumPad5, Keys.D5
+                    InputKey = "5"
+
+                Case Keys.NumPad6, Keys.D6
+                    InputKey = "6"
+
+                Case Keys.NumPad7, Keys.D7
+                    InputKey = "7"
+
+                Case Keys.NumPad8, Keys.D8
+                    InputKey = "8"
+
+                Case Keys.NumPad9, Keys.D9
+                    InputKey = "9"
+
+                Case Keys.Delete, Keys.Back
+                    InputKey = "C"
+
+                Case Keys.Decimal
+                    InputKey = "K"
+
+                Case Keys.Add
+                    InputKey = "A"
+
+                Case Keys.Subtract
+                    InputKey = "S"
+
+                Case Keys.Multiply
+                    InputKey = "M"
+
+                Case Keys.Divide
+                    InputKey = "D"
+
+                Case Keys.Return
+                    InputKey = "E"
+
+            End Select
+
+        End If
+
+        If Not (InputKey = Nothing) Then
+            Update(InputKey)
+        End If
+
+    End Sub
+
+    Private Sub Update(key As Char)
+        Select Case key
+            Case "C"
+                Clear_All()
+
+            Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "K"
+                Build_Num(key)
+
+            Case "A", "S", "M", "D"
+                Execute_Calc(key)
+
+            Case "E"
+                Execute_Equal(key)
+
+        End Select
+    End Sub
+
+    Private Sub Clear_All()
+        IntNum1 = 0
+        StringNum1 = ""
+        IntNum2 = 0
+        StringNum2 = ""
+        Result = 0
+        PreviousKey = ""
+        PreviousNum2 = 0
+
+        TurnOff("A")
+        TurnOff("S")
+        TurnOff("M")
+        TurnOff("D")
+        Show(0)
+
+    End Sub
+
+    Private Sub Build_Num(key As String)
+
+        If AddOn OrElse SubtractOn OrElse MultiplyOn OrElse DivideOn Then
+            StringNum2 += key
+            IntNum2 = Convert.ToInt32(StringNum2)
+            Show(IntNum2)
+
+        Else
+            StringNum1 += key
+            IntNum1 = Convert.ToInt32(StringNum1)
+            Show(IntNum1)
 
         End If
 
     End Sub
 
-    Private Sub CalcButtonClick(sender As Object, e As KeyPressEventArgs) Handles Plus.Click, Abstract.Click, Multiple.Click, Divide.Click
+    Private Sub Execute_Calc(key As Char)
         CountEqual = 0
         ' Input Number 1 があった場合　
         If IntNum1 <> 0 Then
@@ -65,18 +206,19 @@ Public Class Form1
                 Result = ContinueCalc(IntNum1, IntNum2)
             End If
             ' Turn On スイッチ
-            TurnOn(sender, e)
+            TurnOn(key)
 
             ' Equal Event 計算後に続けて計算する
         ElseIf Result <> 0 Then
             ' Turn On スイッチ
-            TurnOn(sender, e)
+            TurnOn(key)
             ' Num1 は　前の結果に代入する
             IntNum1 = Result
         End If
+
     End Sub
 
-    Private Sub Equal_Click(sender As Object, e As EventArgs) Handles Equal.Click
+    Private Sub Execute_Equal(key As Char)
         '　結果を出す
         CountEqual += 1
         If CountEqual = 2 AndAlso Result <> 0 Then
@@ -85,17 +227,17 @@ Public Class Form1
             CountEqual -= 1
 
             Select Case PreviousKey
-                Case "P"
-                    PlusOn = True
-
                 Case "A"
-                    AbstractOn = True
+                    TurnOn("A")
+
+                Case "S"
+                    TurnOn("S")
 
                 Case "M"
-                    MultipleOn = True
+                    TurnOn("M")
 
                 Case "D"
-                    DivideOn = True
+                    TurnOn("D")
 
                 Case Else
                     Debug.WriteLine("Invalid Previous Key Value At Line 155")
@@ -105,74 +247,73 @@ Public Class Form1
         Else
             Result = Calc(IntNum1, IntNum2)
         End If
+
     End Sub
-    Private Sub Clear_Click(sender As Object, e As EventArgs) Handles Clear.Click
-        IntNum1 = 0
+
+    Private Function ContinueCalc(Number1 As Integer, Number2 As Integer) As Integer
+        Dim Result As Integer
+        ' スイッチAddはONにした場合
+        If AddOn Then
+            Result = Number1 + Number2
+            TurnOff("A")
+        End If
+
+        ' スイッチSubtractはONにした場合
+        If SubtractOn Then
+            Result = Number1 - Number2
+            TurnOff("S")
+        End If
+
+        ' スイッチMultiplyはONにした場合
+        If MultiplyOn Then
+            Result = Number1 * Number2
+            TurnOff("M")
+        End If
+
+        ' スイッチDivideはONにした場合
+        If DivideOn Then
+            Result = Number1 / Number2
+            TurnOff("D")
+        End If
+
+        ' Num1は結果に代入する、それ以外は初期化する
+        IntNum1 = Result
         StringNum1 = ""
         IntNum2 = 0
         StringNum2 = ""
-        Result = 0
-        PreviousKey = ""
-        PreviousNum2 = 0
 
-        PlusOn = False
-        AbstractOn = False
-        MultipleOn = False
-        DivideOn = False
-        Show(0)
-    End Sub
-
-    Private Sub Update(num As String)
-        ' いずれのスイッチはONにした場合
-        If PlusOn OrElse AbstractOn OrElse MultipleOn OrElse DivideOn Then
-            StringNum2 += num
-            IntNum2 = Integer.Parse(StringNum2)
-            Show(IntNum2)
-
-            ' そうではなかった場合
-        Else
-            StringNum1 += num
-            IntNum1 = Integer.Parse(StringNum1)
-            Show(IntNum1)
-        End If
-    End Sub
-
-    Private Sub Show(result As Integer)
-        Display.Text = result
-        Debug.WriteLine("Plus On = " & PlusOn)
-        Debug.WriteLine("Abstract On = " & AbstractOn)
-        Debug.WriteLine("Multiple On = " & MultipleOn)
-        Debug.WriteLine("Divide On = " & DivideOn)
-    End Sub
+        Show(Result)
+        Return Result
+    End Function
 
     Private Function Calc(Number1 As Integer, Number2 As Integer) As Integer
         Dim Result As Integer
-        ' スイッチPlusはONした場合
-        If PlusOn Then
+        ' スイッチAddはONした場合
+        If AddOn Then
             Result = Number1 + Number2
-            PreviousKey = "P"
-            PlusOn = False
-        End If
-
-        ' スイッチAbstractはONした場合
-        If AbstractOn Then
-            Result = Number1 - Number2
             PreviousKey = "A"
-            AbstractOn = False
+            TurnOff("A")
         End If
 
-        ' スイッチMultipleはONした場合
-        If MultipleOn Then
+        ' スイッチSubtractはONした場合
+        If SubtractOn Then
+            Result = Number1 - Number2
+            PreviousKey = "S"
+            TurnOff("S")
+        End If
+
+        ' スイッチMultiplyはONした場合
+        If MultiplyOn Then
             Result = Number1 * Number2
             PreviousKey = "M"
-            MultipleOn = False
+            TurnOff("M")
         End If
 
         ' スイッチDivideはONした場合
         If DivideOn Then
             Result = Number1 / Number2
             PreviousKey = "D"
-            DivideOn = False
+            TurnOff("D")
         End If
 
         ' 初期化する
@@ -186,61 +327,50 @@ Public Class Form1
         Show(Result)
         Return Result
     End Function
-    Private Function ContinueCalc(Number1 As Integer, Number2 As Integer) As Integer
-        Dim Result As Integer
-        ' スイッチPlusはONにした場合
-        If PlusOn Then
-            Result = Number1 + Number2
-            PlusOn = False
-        End If
+    Private Sub Show(num As Integer)
 
-        ' スイッチAbstractはONにした場合
-        If AbstractOn Then
-            Result = Number1 - Number2
-            AbstractOn = False
-        End If
+        Display.Text = num
+        Debug.WriteLine("Add On = " & AddOn)
+        Debug.WriteLine("Subtract On = " & SubtractOn)
+        Debug.WriteLine("Multiply On = " & MultiplyOn)
+        Debug.WriteLine("Divide On = " & DivideOn)
 
-        ' スイッチMultipleはONにした場合
-        If MultipleOn Then
-            Result = Number1 * Number2
-            MultipleOn = False
-        End If
-
-        ' スイッチDivideはONにした場合
-        If DivideOn Then
-            Result = Number1 / Number2
-            DivideOn = False
-        End If
-
-        ' Num1は結果に代入する、それ以外は初期化する
-        IntNum1 = Result
-        StringNum1 = ""
-        IntNum2 = 0
-        StringNum2 = ""
-
-        Show(Result)
-        Return Result
-    End Function
-
-    Private Sub TurnOn(s As Object, e As KeyPressEventArgs)
-        If s Is Plus OrElse e.KeyChar = "+" Then
-            PlusOn = True
-
-        ElseIf s Is Abstract OrElse e.KeyChar = "-" Then
-            AbstractOn = True
-
-        ElseIf s Is Multiple OrElse e.KeyChar = "*" Then
-            MultipleOn = True
-
-        ElseIf s Is Divide OrElse e.KeyChar = "/" Then
-            DivideOn = True
-        End If
     End Sub
 
+    Private Sub TurnOn(key As Char)
+        Select Case key
 
+            Case "A"
+                AddOn = True
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.KeyPreview = True
+            Case "S"
+                SubtractOn = True
+
+            Case "M"
+                MultiplyOn = True
+
+            Case "D"
+                DivideOn = True
+
+        End Select
+    End Sub
+
+    Private Sub TurnOff(key As Char)
+        Select Case key
+
+            Case "A"
+                AddOn = False
+
+            Case "S"
+                SubtractOn = False
+
+            Case "M"
+                MultiplyOn = False
+
+            Case "D"
+                DivideOn = False
+
+        End Select
     End Sub
 
 End Class
