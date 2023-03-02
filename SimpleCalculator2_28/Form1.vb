@@ -27,7 +27,7 @@ Public Class Form1
         Dim InputKey As Char
 
         If sender Is Num0 Then
-            InputKey = "X"
+            InputKey = "0"
 
         ElseIf sender Is Num1 Then
             InputKey = "1"
