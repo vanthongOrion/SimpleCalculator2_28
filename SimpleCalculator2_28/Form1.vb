@@ -20,7 +20,7 @@ Public Class Form1
         Me.KeyPreview = True
     End Sub
 
-    Private Sub Input_Hander(sender As Object, e As EventArgs) Handles MyBase.KeyPress, MyBase.KeyUp, Num0.Click, Num1.Click, Num2.Click, Num3.Click,
+    Private Sub Input_Hander(sender As Object, e As EventArgs) Handles MyBase.KeyUp, Num0.Click, Num1.Click, Num2.Click, Num3.Click,
             Num4.Click, Num5.Click, Num6.Click, Num7.Click, Num8.Click, Num9.Click, Add.Click, Subtract.Click, Multiply.Click,
             Divide.Click, Comma.Click, Equal.Click, Clear.Click
 
