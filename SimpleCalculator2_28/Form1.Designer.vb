@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Display = New System.Windows.Forms.Label()
+        Me.Equal = New System.Windows.Forms.Button()
         Me.Num7 = New System.Windows.Forms.Button()
         Me.Num8 = New System.Windows.Forms.Button()
         Me.Num9 = New System.Windows.Forms.Button()
@@ -35,7 +36,6 @@ Partial Class Form1
         Me.Num3 = New System.Windows.Forms.Button()
         Me.Num2 = New System.Windows.Forms.Button()
         Me.Num1 = New System.Windows.Forms.Button()
-        Me.Equal = New System.Windows.Forms.Button()
         Me.Add = New System.Windows.Forms.Button()
         Me.Comma = New System.Windows.Forms.Button()
         Me.Num0 = New System.Windows.Forms.Button()
@@ -53,6 +53,19 @@ Partial Class Form1
         Me.Display.Size = New System.Drawing.Size(286, 60)
         Me.Display.TabIndex = 0
         Me.Display.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Equal
+        '
+        Me.Equal.BackColor = System.Drawing.SystemColors.ActiveBorder
+        Me.Equal.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Equal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
+        Me.Equal.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.Equal.Location = New System.Drawing.Point(231, 246)
+        Me.Equal.Name = "Equal"
+        Me.Equal.Size = New System.Drawing.Size(67, 37)
+        Me.Equal.TabIndex = 16
+        Me.Equal.Text = "="
+        Me.Equal.UseVisualStyleBackColor = False
         '
         'Num7
         '
@@ -210,19 +223,6 @@ Partial Class Form1
         Me.Num1.Text = "1"
         Me.Num1.UseVisualStyleBackColor = False
         '
-        'Equal
-        '
-        Me.Equal.BackColor = System.Drawing.SystemColors.ActiveBorder
-        Me.Equal.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Equal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.Equal.ForeColor = System.Drawing.SystemColors.ButtonFace
-        Me.Equal.Location = New System.Drawing.Point(231, 246)
-        Me.Equal.Name = "Equal"
-        Me.Equal.Size = New System.Drawing.Size(67, 37)
-        Me.Equal.TabIndex = 16
-        Me.Equal.Text = "="
-        Me.Equal.UseVisualStyleBackColor = False
-        '
         'Add
         '
         Me.Add.BackColor = System.Drawing.SystemColors.ActiveBorder
@@ -299,7 +299,9 @@ Partial Class Form1
         Me.Controls.Add(Me.Num7)
         Me.Controls.Add(Me.Display)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "Simple Calculator"
+        Me.KeyPreview = True
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.ResumeLayout(False)
 
     End Sub

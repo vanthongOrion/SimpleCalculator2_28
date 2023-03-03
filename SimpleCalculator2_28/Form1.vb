@@ -16,69 +16,11 @@ Public Class Form1
     Private CountEqual As Integer = 0
     Private Result As Integer
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Activated
-        Me.KeyPreview = True
-    End Sub
-
     Private Sub Input_Hander(sender As Object, e As EventArgs) Handles MyBase.KeyUp, Num0.Click, Num1.Click, Num2.Click, Num3.Click,
             Num4.Click, Num5.Click, Num6.Click, Num7.Click, Num8.Click, Num9.Click, Add.Click, Subtract.Click, Multiply.Click,
             Divide.Click, Comma.Click, Equal.Click, Clear.Click
 
         Dim InputKey As Char
-
-        If sender Is Num0 Then
-            InputKey = "0"
-
-        ElseIf sender Is Num1 Then
-            InputKey = "1"
-
-        ElseIf sender Is Num2 Then
-            InputKey = "2"
-
-        ElseIf sender Is Num3 Then
-            InputKey = "3"
-
-        ElseIf sender Is Num4 Then
-            InputKey = "4"
-
-        ElseIf sender Is Num5 Then
-            InputKey = "5"
-
-        ElseIf sender Is Num6 Then
-            InputKey = "6"
-
-        ElseIf sender Is Num7 Then
-            InputKey = "7"
-
-        ElseIf sender Is Num8 Then
-            InputKey = "8"
-
-        ElseIf sender Is Num9 Then
-            InputKey = "9"
-
-        ElseIf sender Is Add Then
-            InputKey = "A"
-
-        ElseIf sender Is Subtract Then
-            InputKey = "S"
-
-        ElseIf sender Is Multiply Then
-            InputKey = "M"
-
-        ElseIf sender Is Divide Then
-            InputKey = "D"
-
-        ElseIf sender Is Comma Then
-            InputKey = "K"
-
-        ElseIf sender Is Equal Then
-            InputKey = "E"
-
-        ElseIf sender Is Clear Then
-            InputKey = "C"
-
-        End If
-
 
         If TypeOf e Is KeyEventArgs Then
             Dim K As KeyEventArgs = CTypeDynamic(Of KeyEventArgs)(e)
@@ -137,6 +79,63 @@ Public Class Form1
                     InputKey = "E"
 
             End Select
+
+        End If
+
+        If TypeOf e Is MouseEventArgs Then
+
+            If sender Is Num0 Then
+                InputKey = "0"
+
+            ElseIf sender Is Num1 Then
+                InputKey = "1"
+
+            ElseIf sender Is Num2 Then
+                InputKey = "2"
+
+            ElseIf sender Is Num3 Then
+                InputKey = "3"
+
+            ElseIf sender Is Num4 Then
+                InputKey = "4"
+
+            ElseIf sender Is Num5 Then
+                InputKey = "5"
+
+            ElseIf sender Is Num6 Then
+                InputKey = "6"
+
+            ElseIf sender Is Num7 Then
+                InputKey = "7"
+
+            ElseIf sender Is Num8 Then
+                InputKey = "8"
+
+            ElseIf sender Is Num9 Then
+                InputKey = "9"
+
+            ElseIf sender Is Add Then
+                InputKey = "A"
+
+            ElseIf sender Is Subtract Then
+                InputKey = "S"
+
+            ElseIf sender Is Multiply Then
+                InputKey = "M"
+
+            ElseIf sender Is Divide Then
+                InputKey = "D"
+
+            ElseIf sender Is Comma Then
+                InputKey = "K"
+
+            ElseIf sender Is Equal Then
+                InputKey = "E"
+
+            ElseIf sender Is Clear Then
+                InputKey = "C"
+
+            End If
 
         End If
 
@@ -330,10 +329,6 @@ Public Class Form1
     Private Sub Show(num As Integer)
 
         Display.Text = num
-        Debug.WriteLine("Add On = " & AddOn)
-        Debug.WriteLine("Subtract On = " & SubtractOn)
-        Debug.WriteLine("Multiply On = " & MultiplyOn)
-        Debug.WriteLine("Divide On = " & DivideOn)
 
     End Sub
 
