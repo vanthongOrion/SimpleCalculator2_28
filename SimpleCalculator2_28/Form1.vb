@@ -16,10 +16,11 @@ Public Class Form1
     Private CountEqual As Integer = 0
     Private Result As Integer
 
-    Private Sub Input_Hander(sender As Object, e As EventArgs) Handles MyBase.KeyUp, Num0.Click, Num1.Click, Num2.Click, Num3.Click,
+    Private Sub Input_Hander(sender As Object, e As EventArgs) Handles MyBase.KeyDown, Num0.Click, Num1.Click, Num2.Click, Num3.Click,
             Num4.Click, Num5.Click, Num6.Click, Num7.Click, Num8.Click, Num9.Click, Add.Click, Subtract.Click, Multiply.Click,
             Divide.Click, Comma.Click, Equal.Click, Clear.Click
 
+        Me.ActiveControl = Nothing
         Dim InputKey As Char
 
         If TypeOf e Is KeyEventArgs Then

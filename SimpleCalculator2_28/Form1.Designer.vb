@@ -298,10 +298,10 @@ Partial Class Form1
         Me.Controls.Add(Me.Num8)
         Me.Controls.Add(Me.Num7)
         Me.Controls.Add(Me.Display)
-        Me.Name = "Form1"
-        Me.Text = "Simple Calculator"
         Me.KeyPreview = True
+        Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Simple Calculator"
         Me.ResumeLayout(False)
 
     End Sub
