@@ -157,7 +157,7 @@ Public Class Form1
                 Execute_Calc(key)
 
             Case "E"
-                Execute_Equal(key)
+                Execute_Equal()
 
         End Select
     End Sub
@@ -217,7 +217,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Execute_Equal(key As Char)
+    Private Sub Execute_Equal()
         '　結果を出す
         CountEqual += 1
         If CountEqual = 2 AndAlso Result <> 0 Then
@@ -239,7 +239,7 @@ Public Class Form1
                     TurnOn("D")
 
                 Case Else
-                    Debug.WriteLine("Invalid Previous Key Value At Line 155")
+                    Debug.WriteLine("Invalid Previous Key Value At Line 242")
             End Select
 
             Result = Calc(IntNum1, IntNum2)
